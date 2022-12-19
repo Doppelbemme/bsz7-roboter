@@ -10,27 +10,30 @@ void main(){
     while(turns < MAX_TURNS) {
         printf("Ist die Wand da?\n");
         scanf("%s", wall);
-        while (tolower(wall[0]) != 'n' && tolower(wall[0]) != 'y') {
-            printf("Ungültige Eingabe! (y/n)\n");
-            scanf("%s", wall);
-        }
 
-        if(tolower(wall[0]) == 'y') {
-            printf("Drehung.\n");
-            turns = turns + 1;
-        }else if (tolower(wall[0]) == 'n') {
-            printf("Schritt.\n");
-            if(turns == 0){
-                stepsBeforeFirstTurn = stepsBeforeFirstTurn + 1;
-            }else if(turns == 2){
-                stepsBeforeThirdTurn = stepsBeforeThirdTurn + 1;
-            }
+        switch (tolower(wall[0])) {
+            case 'y':
+                printf("Drehung.\n");
+                turns = turns + 1;    
+                break;
+            case 'n':
+                printf("Schritt.\n");
+                if(turns == 0){
+                    stepsBeforeFirstTurn = stepsBeforeFirstTurn + 1;
+                }else if(turns == 2){
+                    stepsBeforeThirdTurn = stepsBeforeThirdTurn + 1;
+                }
+                break;
+            default:
+                printf("Ungültige Eingabe! (y/n)\n");
+                break;
         }
     }
 
     int i;
     int currentSteps = 0;
     int stepsToStartPoint = stepsBeforeThirdTurn - stepsBeforeFirstTurn;
+    
     while (currentSteps < stepsToStartPoint){
         printf("Schritt.\n");
         currentSteps = currentSteps + 1;
