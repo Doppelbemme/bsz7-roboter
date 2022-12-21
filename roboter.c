@@ -1,11 +1,21 @@
 #include <stdio.h>
+#include <ctype.h>
 
 void main(){
     char wall[2];
-    int turns = 0;
-    int stepsBeforeFirstTurn = 0;
-    int stepsBeforeThirdTurn = 0;
-    int MAX_TURNS = 4;
+    int turns;
+    int MAX_TURNS;
+    int stepsBeforeFirstTurn;
+    int stepsBeforeThirdTurn;
+    int currentSteps;
+    int stepsToStartPoint;
+
+    turns = 0;
+    MAX_TURNS = 4;
+    stepsBeforeFirstTurn = 0;
+    stepsBeforeThirdTurn = 0;
+    currentSteps = 0;
+    stepsToStartPoint = 0;
 
     while(turns < MAX_TURNS) {
         printf("Ist die Wand da?\n");
@@ -14,7 +24,7 @@ void main(){
         switch (tolower(wall[0])) {
             case 'y':
                 printf("Drehung.\n");
-                turns = turns + 1;    
+                turns = turns + 1;
                 break;
             case 'n':
                 printf("Schritt.\n");
@@ -30,14 +40,15 @@ void main(){
         }
     }
 
-    int i;
-    int currentSteps = 0;
-    int stepsToStartPoint = stepsBeforeThirdTurn - stepsBeforeFirstTurn;
-    
+    stepsToStartPoint = stepsBeforeThirdTurn - stepsBeforeFirstTurn;
+
     while (currentSteps < stepsToStartPoint){
         printf("Schritt.\n");
         currentSteps = currentSteps + 1;
     }
 
+    if(stepsToStartPoint > 0){
+        printf("(%d Schritte)\n", stepsToStartPoint);
+    }
     printf("Ausgangspunkt erreicht.\n");
 }
